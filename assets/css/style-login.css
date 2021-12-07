@@ -1,0 +1,12 @@
+body.login div#login {
+	width: 400px;
+	padding-top:4%;
+    background-color: #f0f0f1;
+}
+body.login div#login form#loginform {
+    background-color: azure;
+}
+body.login div#login p.message {
+    background-color: azure;
+}
+body.login div#login p#backtoblog a {color: #998877;}
