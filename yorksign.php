@@ -1,7 +1,5 @@
 <?php
-
 /**
- * Plugin Name
  *
  * @package           customsignin
  * @author            WP York <wpyork143@gmail.com>
@@ -23,14 +21,27 @@
 
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class YorkCustomSignin {
+/**
+ * our plugin constant
+* */
+define( 'WP_SIGN_FILE', __FILE__ );
+define( 'WP_SIGN_PLUGIN_PATH', __DIR__ );
+define( 'WP_SIGN_BASENAME', plugin_basename( WP_SIGN_FILE ) );
+define( 'WP_SIGN_DIR', plugin_dir_url( WP_SIGN_FILE ) );
+define( 'WP_SIGN_PATH', plugin_dir_path( WP_SIGN_FILE ) );
+
+/**
+ * YorkCustomSignin class for better code organization
+* */
+
+final class YorkCustomSignin {
+
     /**
      * Construct method 
      * Load immediate code
      * @version 1.0.0
      * @author WP York
-     * */
-
+    * */
     public function __construct()
     {
         add_action( 'login_enqueue_scripts', array( $this, 'gen_login_logo' ) );
@@ -41,7 +52,7 @@ class YorkCustomSignin {
         add_filter( 'login_title', array( $this, 'custom_login_title' ), 99 );
         add_filter( 'admin_footer_text', array( $this, 'remove_footer_admin' ));  
         add_action( 'admin_print_scripts-user-new.php', array( $this,'add_description_jquery' ) );   
-        add_filter( 'plugin_action_links_' . WP_WCSM_BASENAME, array( $this, 'action_links' ) ); 
+        add_filter( 'plugin_action_links_' . WP_SIGN_BASENAME, array( $this, 'action_links' ) ); 
         add_action( 'plugins_loaded', array( $this, 'localization_setup' ) ); /*Localize our plugin*/
 
         /*customizer*/
@@ -51,7 +62,7 @@ class YorkCustomSignin {
     /**
      * Customizer defination
      * 
-     * */
+    * */
     public function customizer_login_settings( $wp_customize ) 
     {
         /*Customize logo panel*/
@@ -121,8 +132,7 @@ class YorkCustomSignin {
 
     /**
      * footer credit 
-     * */
-
+    * */
     public function remove_footer_admin ( ) 
     {
         echo sprintf( '<span id="footer-thankyou"> %s <a href="%s" target="_blank"> %s </a> </span>', esc_html__('Developed by', 'yorksign'), esc_html__('https://wpyork.com/','yorksign'), esc_html__('WP York','yorksign'));
@@ -161,7 +171,7 @@ class YorkCustomSignin {
 
     /**
      * login logo load
-     * */
+    * */
     public function gen_login_logo() 
     {    
         $asset_file_link = plugins_url( '/assets/', __FILE__ );
@@ -182,7 +192,7 @@ class YorkCustomSignin {
 
     /**
      * login head
-     * */
+    * */
     public function gen_login_head()
     {
         add_filter( 'gettext', array( $this,'gen_gettext' ), 10, 3 );
@@ -220,8 +230,7 @@ class YorkCustomSignin {
     /**
      * Stylesheet
      * return null
-     * */
-
+    * */
     public function gen_login_stylesheet() 
     {
         $asset_file_link = plugins_url( '/assets/', __FILE__ );
@@ -229,7 +238,6 @@ class YorkCustomSignin {
 
         wp_enqueue_style( 'custom-login', $asset_file_link . 'css/style-login.css', [], filemtime($folder_path.'css/style-login.css') );
         // wp_enqueue_script( 'custom-login', $asset_file_link . 'js/style-login.js',['jquery'],filemtime($folder_path.'js/style-login.js'), true );
-        // wp_enqueue_script( 'description-add', $asset_file_link . 'js/description-add.js',['jquery'],filemtime($folder_path.'js/description-add.js'), true );
     }
 
     /**
@@ -237,12 +245,12 @@ class YorkCustomSignin {
      *
      * @param mixed $links
      * @return array
-     */
+    */
     public function action_links( $links ) 
     {
         return array_merge(
         [
-            '<a href="' . admin_url( 'wp-admin/customize.php?return=%2Fwp-admin%2Fplugins.php' ) . '">' . __( 'Settings', 'yorksign' ) . '</a>',
+            '<a href="' . admin_url( 'customize.php?return=%2Fwp-admin%2Fplugins.php' ) . '">' . __( 'Settings', 'yorksign' ) . '</a>',
             '<a href="' . esc_url( 'https://wordpress.org/support/plugin/custom-login-customizer/reviews/#new-post' ) . '">' . __( 'Review', 'yorksign' ) . '</a>',
             '<a href="' . esc_url( 'https://wordpress.org/support/plugin/custom-login-customizer/' ) . '">' . __( 'Support', 'yorksign' ) . '</a>'
         ], $links );
@@ -255,9 +263,8 @@ class YorkCustomSignin {
      */
     public function localization_setup() 
     {
-        load_plugin_textdomain( 'wcsm', false, dirname( WP_WCSM_BASENAME ) . '/languages/' );
+        load_plugin_textdomain( 'yorksign', false, dirname( WP_SIGN_BASENAME ) . '/languages/' );
     }
-
 }
-
-new YorkCustomSignin();
+new YorkCustomSignin(); 
+/*plugin code ended*/
