@@ -1,17 +1,25 @@
 <?php
-/*
-* Plugin Name   : Custom Login Customizer
-* Plugin URI    : https://github.com/wpyork/custom-login-customizer/
-* Description   : Wordpress Custom login page by WPyork
-* Version       : 1.0.0
-* Author        : wpyork
-* Author URI    : https://wpyork.com/
-* License       : GPLv2 or later
-* Domain Path   : /languages
-* Text Domain   : yorksign
-* @package        LoginCustomizer
-* @author Coders Time <wpyork143@gmail.com>
-*/
+
+/**
+ * Plugin Name
+ *
+ * @package           customsignin
+ * @author            WP York <wpyork143@gmail.com>
+ * @license           GPL-2.0-or-later
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Custom Login Customizer
+ * Plugin URI:        https://github.com/wpyork/custom-login-customizer/
+ * Description:       Wordpress Custom login page by WP York for wordpress rebranding totally
+ * Version:           1.0.0
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            wpyork
+ * Author URI:        https://wpyork.com/
+ * Text Domain:       yorksign
+ * License:           GPL v2 or later
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ */
 
 if(!defined('ABSPATH')) exit; // Exit if accessed directly
 
