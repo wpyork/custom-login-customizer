@@ -180,7 +180,7 @@ final class YorkCustomSignin {
 
         $custom_logo = get_option('yorksign');
         $logo_url = ( strlen($custom_logo['logo']['url']) > 10 ) ? $custom_logo['logo']['url'] : wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ) , 'full' )[0];
-        $custom_logo_css = "#login h1 a, .login h1 a {background-image: url('".$logo_url."');max-height: 100px;max-width: 380px;background-size: 100% 100%;background-repeat: no-repeat;padding-top: 0;padding-bottom: 0;margin-bottom: 20px;}";
+        $custom_logo_css = "#login h1 a, .login h1 a {background-image: url('".$logo_url."');max-height: 100px;max-width: 380px;background-size:contain;background-repeat: no-repeat;padding-top: 0;padding-bottom: 0;margin-bottom: 20px;width:100%;}";
             wp_add_inline_style( 'custom-login', $custom_logo_css );    
 
         if ( strlen($custom_logo['bg']['url']) > 10 ) {
